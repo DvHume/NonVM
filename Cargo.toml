@@ -1,0 +1,7 @@
+[package]
+name = "trser"
+version = "0.1.0"
+edition = "2024"
+authors = "DvHume"
+
+[dependencies]
