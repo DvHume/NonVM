@@ -1,18 +1,18 @@
 use std::io::*;
 #[derive(Debug, Clone)]
 enum Instruction {
-    Push(i32),
-    Read,
-    Add,
-    Sub,
-    Mul,
-    Print,
-    Halt,
+    Push(i32), // Положить число на вершину стека
+    Read, // Прочитать число от пользователся и положить в стек
+    Add, // Взять 2 верхних числа со стека, сложить и положить результат обратно
+    Sub, // Взять 2 верхних числа, вычесть и положить результат обратно
+    Mul, // Перемножить 2 верхних числа
+    Print, // Достать верхнее число и вывести на экран
+    Halt, // остановить работу
 }
 
 struct VM {
-    stack: Vec<i32>,
-    ip: usize,
+    stack: Vec<i32>, // стек чисел
+    ip: usize, // указатель на текущую инструкцию(начинаем с 0)
 }
 
 impl VM {
@@ -23,12 +23,14 @@ impl VM {
 
 fn run(&mut self, program: Vec<Instruction>) {
     loop {
+        // Проверяем, не вышли ли мы за пределы программы
         if self.ip >= program.len() {
             break;
         }
 
+        // берём текущую инструкцию
         let instruction = &program[self.ip];
-        self.ip += 1;
+        self.ip += 1; // переходим к следующей инструкции
 
         match instruction {
             Instruction::Push(val) => self.stack.push(*val),
